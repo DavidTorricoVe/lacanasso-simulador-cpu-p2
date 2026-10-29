@@ -38,3 +38,40 @@ function ExecuteALU(operation, val1, val2 = 0) {
   CPU.SF = (finalResult & 0x80) !== 0 ? 1 : 0;
   return finalResult;
 }
+// ==========================================
+// MÓDULO 1.1: BUSES Y CONTROL TRI-ESTADO (HIGH-Z)
+// ==========================================
+
+const CONTROL_SIGNALS = [
+  'En_PC', 'Ld_MAR', 'Mem_R', 'Mem_W', 'Ld_MDR', 'En_MDR', 
+  'Ld_IR', 'En_ALU', 'Ld_AX', 'En_AX', 'Ld_BX', 'En_BX', 
+  'Ld_CX', 'En_CX', 'Ld_DX', 'En_DX', 'En_KBD', 'Ld_LCD'
+];
+
+const COLOR_READ  = "#b6d7a8"; // Verde (Lecturas)
+const COLOR_WRITE = "#ea9999"; // Rojo (Escrituras)
+const COLOR_ALU   = "#cfe2f3"; // Azul (Matemáticas)
+
+function SetControlSignals(activeSignals) {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
+  const values = CONTROL_SIGNALS.map(sig => activeSignals.includes(sig) ? [1] : ['Hi-Z']);
+  
+  // Panel visual de micro-palabra (columna X, filas 5 a 22)
+  const range = sheet.getRange(5, 24, CONTROL_SIGNALS.length, 1);
+  range.setValues(values);
+  
+  const backgrounds = values.map(v => v[0] === 1 ? ["#00FF00"] : ["#EFEFEF"]);
+  range.setBackgrounds(backgrounds);
+  SpreadsheetApp.flush();
+  Utilities.sleep(60);
+}
+
+function HighlightBus() {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
+  const busRange = sheet.getRange("S3:T3"); // Rango visual del Bus
+  busRange.setBackground("#FF9900");
+  SpreadsheetApp.flush();
+  Utilities.sleep(80); 
+  busRange.setBackground("#EFEFEF");
+  SpreadsheetApp.flush();
+}
