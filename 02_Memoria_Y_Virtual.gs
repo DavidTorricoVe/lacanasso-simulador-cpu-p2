@@ -40,3 +40,23 @@ function TranslateAddress(virtualAddress) {
   entry.Ref = 1;
   return (entry.PFN * FRAME_SIZE) + offset;
 }
+// TAREA 8: PAGE FAULT Y ALGORITMO FIFO
+let fifoQueue = []; 
+
+function HandlePageFault(vpn) { 
+  let targetFrame = -1; 
+  for (let i = 0; i < NUM_FRAMES; i++) { 
+    if (!PageTable.some(e => e.Present === 1 && e.PFN === i)) { 
+      targetFrame = i; 
+      break; 
+    } 
+  } 
+  if (targetFrame === -1) { 
+    const victima = fifoQueue.shift(); 
+    targetFrame = PageTable[victima].PFN; 
+    PageTable[victima].Present = 0; 
+  } 
+  PageTable[vpn].Present = 1; 
+  PageTable[vpn].PFN = targetFrame; 
+  fifoQueue.push(vpn); 
+}
