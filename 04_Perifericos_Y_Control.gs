@@ -85,3 +85,18 @@ function WriteLCD(asciiValue) {
   lcdRange.setValues([currentDisplay]);
   SpreadsheetApp.flush();
 }// Constantes para la interfaz (Se configurarán el penúltimo día)"Hoja 1""B10"// Celda de entrada del teclado"D10:K10"// Rango de 8 celdas para LCD 8x1// Función para leer un valor hexadecimal ingresado en el Teclado// Si la celda está vacía o es inválida, retorna 0// Función para enviar un carácter ASCII o Hex a la pantalla LCD 8x1// Maneja un buffer interno y desplaza los caracteres hacia la izquierda (efecto scroll)// Desplazar todo una posición a la izquierda// Convertir el valor a carácter imprimible, o mostrarlo en Hex si no es imprimible"[""]"
+// TAREA #15 (JORGE): Programa 3 de Estrés de Jerarquía de Memoria (Cache Miss/Hit + Page Faults + Write-Back)
+function CargarCatalogoProg3() {
+const ideLines = [
+["1", "INICIO", "MOV AX, imm", "AAh", ""],
+["2", "", "STORE [mem], AX", "40h", ""],
+["3", "", "LOAD BX, [mem]", "40h", ""],
+["4", "", "LOAD CX, [mem]", "41h", ""],
+["5", "", "MOV AX, imm", "77h", ""],
+["6", "FALL01", "VSTORE [vpn], AX", "80h", ""],
+["7", "FALL02", "VLOAD DX, [vpn]", "A2h", ""],
+["8", "FIN", "HLT", "", ""],
+["9", "SWAP_D", "DB", "142:99", ""]
+];
+VolcarProgramaEnIDE(ideLines, "00", "FIFO", "SWAP", "Programa 3: Estrés de Caché L1/L2 y Page Faults con Write-Back");
+}
