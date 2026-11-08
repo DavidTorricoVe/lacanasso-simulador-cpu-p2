@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="docs/logo.jpg" alt="Logo Equipo Lacanasso" width="180" />
+  <img src="docs/logo.jpg" alt="Logo Equipo Lacanazzo" width="180" />
 
   # Simulador Avanzado de CPU y Jerarquía de Memoria de 8 Bits
   ### Proyecto Académico — Parcial 2 (Arquitectura de Computadoras)
