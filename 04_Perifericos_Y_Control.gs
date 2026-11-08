@@ -100,3 +100,18 @@ const ideLines = [
 ];
 VolcarProgramaEnIDE(ideLines, "00", "FIFO", "SWAP", "Programa 3: Estrés de Caché L1/L2 y Page Faults con Write-Back");
 }
+// TAREA #15 (JORGE): Programa 3 de Estrés de Jerarquía de Memoria (Cache Miss/Hit + Page Faults + Write-Back)
+function CargarCatalogoProg3() {
+const ideLines = [
+["1", "INICIO", "MOV AX, imm", "AAh", ""],
+["2", "", "STORE [mem], AX", "40h", ""],
+["3", "", "LOAD BX, [mem]", "40h", ""],
+["4", "", "LOAD CX, [mem]", "41h", ""],
+["5", "", "MOV AX, imm", "77h", ""],
+["6", "FALL01", "VSTORE [vpn], AX", "80h", ""],
+["7", "FALL02", "VLOAD DX, [vpn]", "A2h", ""],
+["8", "FIN", "HLT", "", ""],
+["9", "SWAP_D", "DB", "142:99", ""]
+];
+VolcarProgramaEnIDE(ideLines, "00", "FIFO", "SWAP", "Programa 3: Estrés de Caché L1/L2 y Page Faults con Write-Back");
+}
